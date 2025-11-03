@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>独自ローマ字変換</title></head>
+<body>
+  <h1>独自ローマ字→漢字変換</h1>
+  <input id="input" placeholder="例: háxi">
+  <button onclick="convert()">変換</button>
+  <p id="output"></p>
+
+  <script>
+    const dict = {
+      "háxi": "箸",
+      "haxí": "橋"
+    };
+
+    function convert(){
+      const input = document.getElementById("input").value;
+      document.getElementById("output").textContent = dict[input] || "(変換なし)";
+    }
+  </script>
+</body>
+</html>
