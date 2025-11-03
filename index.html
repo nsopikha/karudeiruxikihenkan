@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><meta charset="UTF-8"><title>独自ローマ字変換</title></head>
+<head>
+<meta charset="UTF-8">
+<title>カルデール式↔漢字変換</title>
+<style>
+body { font-family: sans-serif; padding: 1.5em; }
+h1 { margin-bottom: 0.5em; }
+input { width: 80%; font-size: 1.2em; padding: 0.3em; }
+button { padding: 0.3em 0.8em; margin: 0.3em; }
+p { font-size: 1.3em; }
+</style>
+</head>
 <body>
-  <h1>独自ローマ字→漢字変換</h1>
-  <input id="input" placeholder="例: háxi">
-  <button onclick="convert()">変換</button>
-  <p id="output"></p>
+  <h1>カルデール式 ↔ 漢字 変換ツール</h1>
 
-  <script>
-    const dict = {
-      "háxi": "箸",
-      "haxí": "橋"
-    };
+  <h2>1️⃣ カルデール式 → 漢字</h2>
+  <input id="toKanji" placeholder="例: háxi">
+  <button onclick="convertToKanji()">変換</button>
+  <p id="outKanji"></p>
 
-    function convert(){
-      const input = document.getElementById("input").value;
-      document.getElementById("output").textContent = dict[input] || "(変換なし)";
-    }
-  </script>
+  <h2>2️⃣ 漢字 → カルデール式</h2>
+  <input id="toRomaji" placeholder="例: 箸">
+  <button onclick="convertToRomaji()">変換</button>
+  <p id="outRomaji"></p>
+
+<script>
+const dict = {
+  "háxi": "箸",
+  "haxí": "橋",
+  "xú": "主",
+  "qiú": "中"
+};
+
+// 逆引き辞書を自動生成
+const reverseDict = Object.fromEntries(
+  Object.entries(dict).map(([r, k]) => [k, r])
+);
+
+function convertToKanji(){
+  const input = document.getElementById("toKanji").value;
+  document.getElementById("outKanji").textContent = dict[input] || "(変換なし)";
+}
+
+function convertToRomaji(){
+  const input = document.getElementById("toRomaji").value;
+  document.getElementById("outRomaji").textContent = reverseDict[input] || "(変換なし)";
+}
+</script>
 </body>
 </html>
